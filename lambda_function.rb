@@ -9,9 +9,10 @@ def lambda_handler(event:, context:)
   source_bucket = event['s3']['bucket']['name']
 
   destination_bucket = ENV['DEST_BUCKET']
+  aws_region = ENV['AWS_REGION']
   filedate = Date.parse(filename.split('.')[1]).to_s
 
-  s3 = Aws::S3::Resource.new(region: 'us-east-1')
+  s3 = Aws::S3::Resource.new(region: aws_region)
 
   source_file = s3.bucket(source_bucket).object(filename)
 
